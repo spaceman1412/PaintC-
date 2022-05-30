@@ -50,6 +50,7 @@ namespace WinFormsApp1
             this.buttonLine.TabIndex = 0;
             this.buttonLine.Text = "Line";
             this.buttonLine.UseVisualStyleBackColor = true;
+            this.buttonLine.Click += new System.EventHandler(this.buttonLine_Click);
             // 
             // buttonEclipse
             // 
@@ -59,6 +60,7 @@ namespace WinFormsApp1
             this.buttonEclipse.TabIndex = 1;
             this.buttonEclipse.Text = "Eclipse";
             this.buttonEclipse.UseVisualStyleBackColor = true;
+            this.buttonEclipse.Click += new System.EventHandler(this.buttonEclipse_Click);
             // 
             // buttonFilledEclipse
             // 
@@ -68,6 +70,7 @@ namespace WinFormsApp1
             this.buttonFilledEclipse.TabIndex = 2;
             this.buttonFilledEclipse.Text = "Filled Eclipse";
             this.buttonFilledEclipse.UseVisualStyleBackColor = true;
+            this.buttonFilledEclipse.Click += new System.EventHandler(this.buttonFilledEclipse_Click);
             // 
             // buttonRectangle
             // 
@@ -77,6 +80,7 @@ namespace WinFormsApp1
             this.buttonRectangle.TabIndex = 3;
             this.buttonRectangle.Text = "Rectangle";
             this.buttonRectangle.UseVisualStyleBackColor = true;
+            this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangle_Click);
             // 
             // buttonFilledRectangle
             // 
@@ -122,6 +126,7 @@ namespace WinFormsApp1
             this.buttonPolygon.TabIndex = 8;
             this.buttonPolygon.Text = "Polygon";
             this.buttonPolygon.UseVisualStyleBackColor = true;
+            this.buttonPolygon.Click += new System.EventHandler(this.buttonPolygon_Click);
             // 
             // buttonFilledPolygon
             // 
@@ -139,6 +144,10 @@ namespace WinFormsApp1
             this.plMain.Name = "plMain";
             this.plMain.Size = new System.Drawing.Size(698, 404);
             this.plMain.TabIndex = 10;
+            this.plMain.Paint += new System.Windows.Forms.PaintEventHandler(this.plMain_Paint);
+            this.plMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plMain_MouseDown);
+            this.plMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.plMain_MouseMove);
+            this.plMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.plMain_MouseUp);
             // 
             // Form1
             // 
@@ -158,6 +167,7 @@ namespace WinFormsApp1
             this.Controls.Add(this.buttonLine);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
