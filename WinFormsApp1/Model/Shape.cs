@@ -10,13 +10,14 @@ namespace WinFormsApp1.Model
 {
     abstract class Shape
     {
-        public abstract Point p1 { get; set; }
-        public abstract Point p2 { get; set; }
-        public abstract int width { get; set; }
+        public Point p1;
+        public Point p2;
+        public int width;
         public abstract Color color { get; set; }
         public abstract Graphics gp { get; set; }
 
         public abstract void Draw();
+        public abstract bool Drag(Point point);
 
     }
 }

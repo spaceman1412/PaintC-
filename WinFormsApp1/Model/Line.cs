@@ -12,12 +12,12 @@ namespace WinFormsApp1.Model
     class Line : Shape
     {
         public override Color color { get; set; }
-        public override int width { get; set; }
+        
         public override Graphics gp { get; set; }
-        public override Point p1 { get; set; }
-        public override Point p2 { get; set; }
+       
 
-
+        int height;
+        
         Pen pen;
 
         public Line(Point p1, Point p2, Graphics gp, int width, Color color)
@@ -34,8 +34,26 @@ namespace WinFormsApp1.Model
 
         public override void Draw()
         {
+            
             gp.DrawLine(pen, this.p1,
                   this.p2);
+        }
+
+        public override bool Drag(Point point)
+        {
+            this.width = Math.Abs(this.p2.X - this.p1.X);
+            this.height = Math.Abs(this.p2.Y - this.p1.Y);
+
+            Rectangle rectangle = new Rectangle(Math.Min(this.p1.X, this.p2.X),
+                        Math.Min(this.p1.Y, this.p2.Y),
+                        this.width, this.height);
+
+            if (rectangle.Contains(point))
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
     }

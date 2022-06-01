@@ -99,6 +99,7 @@ namespace WinFormsApp1
             this.buttonCircle.TabIndex = 5;
             this.buttonCircle.Text = "Circle";
             this.buttonCircle.UseVisualStyleBackColor = true;
+            this.buttonCircle.Click += new System.EventHandler(this.buttonCircle_Click);
             // 
             // buttonFilledCircle
             // 
@@ -108,6 +109,7 @@ namespace WinFormsApp1
             this.buttonFilledCircle.TabIndex = 6;
             this.buttonFilledCircle.Text = "Filled Circle";
             this.buttonFilledCircle.UseVisualStyleBackColor = true;
+            this.buttonFilledCircle.Click += new System.EventHandler(this.buttonFilledCircle_Click);
             // 
             // buttonArc
             // 
@@ -117,6 +119,7 @@ namespace WinFormsApp1
             this.buttonArc.TabIndex = 7;
             this.buttonArc.Text = "Arc";
             this.buttonArc.UseVisualStyleBackColor = true;
+            this.buttonArc.Click += new System.EventHandler(this.buttonArc_Click);
             // 
             // buttonPolygon
             // 
@@ -136,6 +139,7 @@ namespace WinFormsApp1
             this.buttonFilledPolygon.TabIndex = 9;
             this.buttonFilledPolygon.Text = "Filled Polygon";
             this.buttonFilledPolygon.UseVisualStyleBackColor = true;
+            this.buttonFilledPolygon.Click += new System.EventHandler(this.buttonFilledPolygon_Click);
             // 
             // plMain
             // 

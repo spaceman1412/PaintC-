@@ -9,19 +9,19 @@ using System.Windows.Forms;
 
 namespace WinFormsApp1.Model
 {
-    class Polygon  : Shape
+    class FilledPolygon : Shape
     {
         public override Color color { get; set; }
         public override Graphics gp { get; set; }
-        
+   
 
         Point[] points = { };
         List<Point> listPointContainer = new List<Point>();
         int height;
-        
-        Pen pen;
 
-        public Polygon(Point p1, Point p2, Graphics gp, int width, Color color)
+        Brush brush;
+
+        public FilledPolygon(Point p1, Point p2, Graphics gp, int width, Color color)
         {
             this.color = color;
             this.width = width;
@@ -29,7 +29,7 @@ namespace WinFormsApp1.Model
             this.p1 = p1;
             this.p2 = p2;
 
-            pen = new Pen(color, width);
+            brush = new SolidBrush(color);
             this.listPointContainer.Add(p1);
         }
 
@@ -39,13 +39,12 @@ namespace WinFormsApp1.Model
                 this.listPointContainer.Add(p2);
 
             points = this.listPointContainer.ToArray();
-            gp.DrawPolygon(pen, points);
+            gp.FillPolygon(brush, points);
         }
 
         public override bool Drag(Point point)
         {
             return false;
         }
-
     }
 }
