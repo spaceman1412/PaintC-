@@ -20,15 +20,21 @@ namespace WinFormsApp1.Model
         
         Pen pen;
 
-        public Line(Point p1, Point p2, Graphics gp, int width, Color color)
+        public Line(Point p1, Point p2, Graphics gp, int width, Color color,DashStyle dashStyle,int zoom)
         {
             this.color = color;
             this.width = width;
             this.gp = gp;
             this.p1 = p1;
             this.p2 = p2;
+            this.dashStyle = dashStyle;
+            this.zoom = zoom;
+            this.width = width + zoom;
+
 
             pen = new Pen(color, width);
+            pen.DashStyle = dashStyle;
+
         }
 
 

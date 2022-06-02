@@ -40,6 +40,17 @@ namespace WinFormsApp1
             this.buttonPolygon = new System.Windows.Forms.Button();
             this.buttonFilledPolygon = new System.Windows.Forms.Button();
             this.plMain = new System.Windows.Forms.Panel();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.comboBoxDashStyle = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxColor = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxSize = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLine
@@ -153,11 +164,129 @@ namespace WinFormsApp1
             this.plMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.plMain_MouseMove);
             this.plMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.plMain_MouseUp);
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(964, 364);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(109, 35);
+            this.buttonDelete.TabIndex = 11;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // comboBoxDashStyle
+            // 
+            this.comboBoxDashStyle.FormattingEnabled = true;
+            this.comboBoxDashStyle.Items.AddRange(new object[] {
+            "Solid",
+            "Dot",
+            "Dash",
+            "DashDot",
+            "DashDotDot"});
+            this.comboBoxDashStyle.Location = new System.Drawing.Point(957, 84);
+            this.comboBoxDashStyle.Name = "comboBoxDashStyle";
+            this.comboBoxDashStyle.Size = new System.Drawing.Size(134, 23);
+            this.comboBoxDashStyle.TabIndex = 12;
+            this.comboBoxDashStyle.SelectedIndexChanged += new System.EventHandler(this.comboBoxDashStyle_SelectedIndexChanged);
+            this.comboBoxDashStyle.SelectedValueChanged += new System.EventHandler(this.comboBoxDashStyle_SelectedValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(964, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(114, 30);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Dash Style";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(987, 132);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 30);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Color";
+            // 
+            // comboBoxColor
+            // 
+            this.comboBoxColor.FormattingEnabled = true;
+            this.comboBoxColor.Items.AddRange(new object[] {
+            "Blue",
+            "Red",
+            "Yellow"});
+            this.comboBoxColor.Location = new System.Drawing.Point(957, 166);
+            this.comboBoxColor.Name = "comboBoxColor";
+            this.comboBoxColor.Size = new System.Drawing.Size(134, 23);
+            this.comboBoxColor.TabIndex = 16;
+            this.comboBoxColor.SelectedIndexChanged += new System.EventHandler(this.comboBoxColor_SelectedIndexChanged);
+            this.comboBoxColor.ValueMemberChanged += new System.EventHandler(this.comboBoxColor_ValueMemberChanged);
+            this.comboBoxColor.SelectedValueChanged += new System.EventHandler(this.comboBoxColor_SelectedValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(987, 201);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(52, 30);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Size";
+            // 
+            // textBoxSize
+            // 
+            this.textBoxSize.Location = new System.Drawing.Point(957, 245);
+            this.textBoxSize.Name = "textBoxSize";
+            this.textBoxSize.Size = new System.Drawing.Size(134, 23);
+            this.textBoxSize.TabIndex = 19;
+            this.textBoxSize.Text = "5";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(987, 283);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 30);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Zoom";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(958, 421);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(100, 23);
+            this.progressBar1.TabIndex = 22;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.LargeChange = 20;
+            this.trackBar1.Location = new System.Drawing.Point(964, 316);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.SmallChange = 20;
+            this.trackBar1.TabIndex = 23;
+            this.trackBar1.TickFrequency = 20;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 495);
+            this.ClientSize = new System.Drawing.Size(1122, 495);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxSize);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBoxColor);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxDashStyle);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.plMain);
             this.Controls.Add(this.buttonFilledPolygon);
             this.Controls.Add(this.buttonPolygon);
@@ -172,7 +301,9 @@ namespace WinFormsApp1
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -189,6 +320,16 @@ namespace WinFormsApp1
         private System.Windows.Forms.Button buttonPolygon;
         private System.Windows.Forms.Button buttonFilledPolygon;
         private System.Windows.Forms.Panel plMain;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.ComboBox comboBoxDashStyle;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxColor;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxSize;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 

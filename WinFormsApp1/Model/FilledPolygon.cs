@@ -21,13 +21,16 @@ namespace WinFormsApp1.Model
 
         Brush brush;
 
-        public FilledPolygon(Point p1, Point p2, Graphics gp, int width, Color color)
+        public FilledPolygon(Point p1, Point p2, Graphics gp, int width, Color color,DashStyle dashStyle,int zoom)
         {
             this.color = color;
             this.width = width;
             this.gp = gp;
             this.p1 = p1;
             this.p2 = p2;
+            this.dashStyle = dashStyle;
+            this.zoom = zoom;
+
 
             brush = new SolidBrush(color);
             this.listPointContainer.Add(p1);

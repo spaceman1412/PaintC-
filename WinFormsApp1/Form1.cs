@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,11 +35,15 @@ namespace WinFormsApp1
 
         bool existedPolygon = false;
         List<Shape> shapes = new List<Shape>();
+        List<Shape> clickedShape = new List<Shape>();
+        int zoom = 0;
+        bool zooming = false;
+        bool onDelete = false;
         int ButtonState = (int)ButtonClick.Null;
+        DashStyle dashStyle = DashStyle.Solid;
         int position;
         Point mousePosition;
-        Point cursor;
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -53,11 +56,15 @@ namespace WinFormsApp1
         private void plMain_MouseDown(object sender, MouseEventArgs e)
         {
             this.isStart = true;
+            this.width =  Int32.Parse(textBoxSize.Text.Trim());
+            if (Form.ModifierKeys == Keys.Control)
+                this.onDelete = true;
+
             if (this.ButtonState == (int)ButtonClick.Line)
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                Line line = new Line(p1,p2 ,gp, width, color);
+                Line line = new Line(p1,p2 ,gp, width, color,dashStyle,zoom);
                 
 
                 this.shapes.Add(line);
@@ -67,7 +74,7 @@ namespace WinFormsApp1
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                Eclipse eclipse = new Eclipse(p1, p2, gp, width, color);
+                Eclipse eclipse = new Eclipse(p1, p2, gp, width, color, dashStyle, zoom);
 
                 this.shapes.Add(eclipse);
             }
@@ -75,7 +82,7 @@ namespace WinFormsApp1
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                FilledEclipse filledEclipse = new FilledEclipse(p1, p2, gp, width, color);
+                FilledEclipse filledEclipse = new FilledEclipse(p1, p2, gp, width, color, dashStyle, zoom);
 
                 this.shapes.Add(filledEclipse);
             }
@@ -84,7 +91,7 @@ namespace WinFormsApp1
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                RectangleS rectangleS = new RectangleS(p1, p2, gp, width, color);
+                RectangleS rectangleS = new RectangleS(p1, p2, gp, width, color, dashStyle, zoom);
 
                 this.shapes.Add(rectangleS);
             }
@@ -93,7 +100,7 @@ namespace WinFormsApp1
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                CircleS circleS = new CircleS(p1, p2, gp, width, color);
+                CircleS circleS = new CircleS(p1, p2, gp, width, color, dashStyle, zoom);
 
                 this.shapes.Add(circleS);
             }
@@ -102,7 +109,7 @@ namespace WinFormsApp1
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                FilledCircle filledCircle = new FilledCircle(p1, p2, gp, width, color);
+                FilledCircle filledCircle = new FilledCircle(p1, p2, gp, width, color, dashStyle, zoom);
 
                 this.shapes.Add(filledCircle);
             }
@@ -112,7 +119,7 @@ namespace WinFormsApp1
             {
                 Point p1 = e.Location;
                 Point p2 = e.Location;
-                Arc arc = new Arc(p1, p2, gp, width, color);
+                Arc arc = new Arc(p1, p2, gp, width, color, dashStyle, zoom);
 
                 this.shapes.Add(arc);
             }
@@ -125,7 +132,7 @@ namespace WinFormsApp1
                     Point p1 = e.Location;
                     Point p2 = e.Location;
 
-                    Polygon polygon = new Polygon(p1, p2, gp, width, color);
+                    Polygon polygon = new Polygon(p1, p2, gp, width, color, dashStyle, zoom);
                     this.shapes.Add(polygon);
                 }
                 else
@@ -141,7 +148,7 @@ namespace WinFormsApp1
                     Point p1 = e.Location;
                     Point p2 = e.Location;
 
-                    FilledPolygon filledPolygon = new FilledPolygon(p1, p2, gp, width, color);
+                    FilledPolygon filledPolygon = new FilledPolygon(p1, p2, gp, width, color, dashStyle, zoom);
                     this.shapes.Add(filledPolygon);
 
                 }
@@ -160,6 +167,10 @@ namespace WinFormsApp1
                         position = i;
                         this.drag = true;
                         this.mousePosition = e.Location;
+                        if(onDelete)
+                        {
+                            this.clickedShape.Add(shapes[i]);
+                        }
                     }
                 }
                 
@@ -203,10 +214,11 @@ namespace WinFormsApp1
 
         private void plMain_Paint(object sender, PaintEventArgs e)
         {
-            if (this.isStart == true)
+            if (this.isStart || this.zooming )
             {
                 for (int i = 0; i < this.shapes.Count; i++)
                 {
+                    this.shapes[i].zoom = this.zoom;
                     this.shapes[i].Draw();
                 }
 
@@ -281,6 +293,78 @@ namespace WinFormsApp1
         private void buttonArc_Click(object sender, EventArgs e)
         {
             this.ButtonState = (int)ButtonClick.Arc;
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (clickedShape.Count == 0)
+                return;
+            foreach (var item in clickedShape)
+            {
+                this.shapes.Remove(item);
+            }
+            plMain.Refresh();
+        }
+
+        private void comboBoxDashStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxDashStyle_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxDashStyle.SelectedItem.ToString())
+            {
+                case "Dash":
+                    dashStyle = DashStyle.Dash;
+                    break;
+                case "DashDot":
+                    dashStyle = DashStyle.DashDot;
+                    break;
+                case "DashDotDot":
+                    dashStyle = DashStyle.DashDotDot;
+                    break;
+                case "Dot":
+                    dashStyle = DashStyle.Dot;
+                    break;
+                case "Solid":
+                    dashStyle = DashStyle.Solid;
+                    break;
+            }
+        }
+
+        private void comboBoxColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxColor_ValueMemberChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxColor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxColor.SelectedItem.ToString())
+            {
+                case "Blue":
+                    color = Color.Blue;
+                    break;
+                case "Red":
+                    color = Color.Red;
+                    break;
+                case "Yellow":
+                    color = Color.Yellow;
+                    break;
+            }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            this.zoom = trackBar1.Value;
+          
+            this.zooming = true;
+            this.plMain.Refresh();
         }
     }
 }

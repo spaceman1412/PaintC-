@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace WinFormsApp1.Model
         public Point p1;
         public Point p2;
         public int width;
+        public int zoom;
+        public DashStyle dashStyle;
         public abstract Color color { get; set; }
         public abstract Graphics gp { get; set; }
 
